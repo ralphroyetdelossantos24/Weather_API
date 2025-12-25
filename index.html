@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anime Explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1 class="anime-logo">RALPH ANIME <span>THE EXPLORER</span></h1>
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search anime...">
+    <button id="search-btn" type="button">Search</button>
+    <button id="quote-btn" type="button">🎲 Random Quote</button>
+    <button id="theme-toggle" type="button">☀️ Light Mode</button>
+  </div>
+</header>
+
+<main>
+  <section id="error" aria-live="polite"></section>
+  <section id="quote"></section>
+  <section id="results"></section>
+  <section id="details"></section>
+  <!-- Modal for character image preview -->
+  <div id="image-modal" class="modal" style="display:none;">
+    <span class="modal-backdrop"></span>
+    <img class="modal-img" src="" alt="Character Preview">
+  </div>
+</main>
+
+<footer>
+  <p>Credits: Data from <a href="https://jikan.moe/" target="_blank" rel="noreferrer">Jikan API</a> (MyAnimeList unofficial API).</p>
+
+  <details>
+    <summary>API Info (Project Requirements)</summary>
+    <div class="api-info">
+      <p><strong>Base URL:</strong> https://api.jikan.moe/v4/</p>
+      <p><strong>Endpoints used:</strong></p>
+      <ul>
+        <li><code>GET /top/anime?filter=bypopularity&amp;limit=12</code></li>
+        <li><code>GET /anime/{id}</code></li>
+        <li><code>GET /anime?q={query}&amp;limit=12</code></li>
+        <li><code>GET /anime/{id}/characters</code></li>
+        <li><code>GET /anime/{id}/episodes</code></li>
+      </ul>
+      <p><strong>Required parameters:</strong> <code>{id}</code> (path), <code>q</code>, <code>limit</code>, <code>filter</code> (query).</p>
+      <p><strong>Authentication:</strong> None (no API key required).</p>
+      <p><strong>Sample JSON (parts used in this project):</strong></p>
+      <pre>{
+  "data": {
+    "mal_id": 21,
+    "title": "One Piece",
+    "score": 8.7,
+    "images": { "jpg": { "image_url": "..." } }
+  }
+}</pre>
+    </div>
+  </details>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
