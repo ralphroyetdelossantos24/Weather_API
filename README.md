@@ -21,7 +21,7 @@ A web dashboard for searching anime and characters using the Jikan API, with a c
 
 1. **Clone the repository**
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/ralphroyetdelossantos24/Weather_API.git
    ```
 2. **Navigate to the project folder**
    ```sh
@@ -60,3 +60,4 @@ Created by Ralph Royet, December 2025.
 
 **Authentication:**
 - No API key required (public API)
+
