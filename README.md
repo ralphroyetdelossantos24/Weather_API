@@ -21,7 +21,7 @@ A modern weather dashboard that shows current weather and a 5-day forecast for a
 
 1. **Clone the repository**
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/ralphroyetdelossantos24/Weather_API.git
    ```
 2. **Navigate to the project folder**
    ```sh
@@ -61,4 +61,5 @@ Created by Ralph Royet, December 2025.
 
 **Authentication:**
 - Free API key required (register at OpenWeatherMap)
+
 
