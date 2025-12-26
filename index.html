@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherWise</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="color-scheme" content="dark">
+</head>
+<body>
+    <!--
+        Main WeatherWise App Container
+        Contains sidebar, main content, and background
+    -->
+    <main class="app" aria-label="WeatherWise dashboard">
+        <div class="bg" aria-hidden="true"></div>
+
+        <!--
+            Sidebar: Contains branding, status, area selection, and sidebar location
+        -->
+        <section class="shell">
+            <aside class="sidebar" aria-label="Sidebar">
+                <!-- Branding Section -->
+                <header class="brand">
+                    <div class="brand__mark" aria-hidden="true"></div>
+                    <div class="brand__text">
+                        <div class="brand__name">WeatherWise</div>
+                        <div class="brand__sub">Real-time forecast</div>
+                    </div>
+                </header>
+
+                <!-- Status Panel: Shows weather status and chart -->
+                <div class="panel">
+                    <div class="panel__label">Status</div>
+
+                    <div class="status">
+                        <div class="status__meta">
+                            <div class="status__value" id="statusValue">--%</div>
+                            <div class="status__chip" id="statusLabel">--</div>
+                        </div>
+
+                        <div class="status__chart" aria-hidden="true">
+                            <svg viewBox="0 0 240 90" class="curve" focusable="false">
+                                <path id="statusCurve" d="M10,75 C60,85 90,60 120,52 C155,43 175,25 230,18" />
+                                <circle id="statusDot" cx="180" cy="30" r="6" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Area Selection Panel -->
+                <div class="panel">
+                    <div class="panel__row">
+                        <div class="panel__label">Select Area</div>
+                        <div class="panel__hint" id="unitsHint">°C</div>
+                    </div>
+
+                    <label class="sr-only" for="citySelect">Select a city in the Philippines</label>
+                    <select id="citySelect" class="select" aria-label="Philippines cities">
+                        <option value="">Choose a PH city…</option>
+                    </select>
+
+                    <div class="globe" aria-hidden="true">
+                        <div class="globe__shine"></div>
+                        <div class="globe__pin globe__pin--a"></div>
+                        <div class="globe__pin globe__pin--b"></div>
+                        <div class="globe__pin globe__pin--c"></div>
+                    </div>
+
+                    <div class="sidebar__foot" id="sidebarLocation">—</div>
+                </div>
+            </aside>
+
+            <!--
+                Main Content: Search, alerts, weather display, recent, favorites, forecast, footer
+            -->
+            <section class="content" aria-label="Main content">
+                <!-- Topbar: Search and theme toggle -->
+                <header class="topbar">
+                    <div class="search">
+                        <button class="iconbtn" id="searchBtn" type="button" aria-label="Search">
+                            <span aria-hidden="true">⌕</span>
+                        </button>
+                        <input id="searchInput" class="search__input" type="search" placeholder="Search city…" autocomplete="off" />
+                    </div>
+                    <div class="topbar__actions">
+                        <button class="pill pill--ghost" type="button" id="themeBtn" aria-label="Toggle theme">Theme</button>
+                    </div>
+                </header>
+
+                <!-- Alerts for errors/status -->
+                <section class="alerts" aria-label="Status messages">
+                    <div id="errorBox" class="alert alert--error" role="alert" hidden></div>
+                </section>
+
+                <!--
+                    Hero Section: Main weather info, location, temp, high/low, humidity, favorite, headline
+                -->
+                <div class="hero">
+                    <div class="hero__left">
+                        <div class="locline">
+                            <span class="locpin" aria-hidden="true">●</span>
+                            <span id="locationLine">—</span>
+                            <span class="muted" id="dateLine">—</span>
+                        </div>
+
+                        <div class="tempblock">
+                            <div class="temp" id="tempNow">--°</div>
+                            <div class="hilow" aria-label="High and low">
+                                <div class="hilow__chip"><span class="muted">H</span> <span id="tempHigh">--°</span></div>
+                                <div class="hilow__chip"><span class="muted">L</span> <span id="tempLow">--°</span></div>
+                            </div>
+                            <div class="humidity" id="humidityNow">Humidity: --%</div>
+                            <!--
+                                Favorite Button: Allows the user to add or remove the current city from their favorites.
+                            -->
+                            <button id="favoriteBtn" class="favorite-btn" type="button" style="margin-top:8px;">☆</button>
+                        </div>
+
+                        <div class="headline" id="headline">—</div>
+                    </div>
+
+                    <div class="hero__right">
+                        <p class="blurb">With real time data and advanced technology, we provide reliable forecasts for any location around the world.</p>
+
+                        <!-- Recently Searched Cities -->
+                        <div class="recent">
+                            <div class="recent__head">
+                                <div class="recent__title">Recently Searched</div>
+                            </div>
+                            <div class="recent__grid" id="recentGrid" aria-label="Recent searches"></div>
+                        </div>
+
+                        <!-- Favorites Section: Saved favorite cities -->
+                        <div class="favorites">
+                            <div class="favorites__head">
+                                <div class="favorites__title">Favorites</div>
+                            </div>
+                            <div class="favorites__grid" id="favoritesGrid" aria-label="Favorite cities"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                    Forecast Section: 5-day forecast cards
+                -->
+                <section class="forecast" aria-label="Forecast">
+                    <div class="forecast__days" id="forecastDays" aria-hidden="true"></div>
+                    <div class="forecast__cards" id="forecastCards" aria-label="5-day forecast details"></div>
+                    <button class="forecast__loadmore" id="forecastLoadMore" type="button" style="display:none;margin:16px auto 0 auto;">Load more</button>
+                </section>
+
+                <!-- Footer: Meta info and credits -->
+                <footer class="foot">
+                    <div class="foot__meta" id="metaLine">—</div>
+                    <div class="foot__credits">Powered by <a class="foot__link" href="https://openweathermap.org/" target="_blank" rel="noreferrer">OpenWeather</a></div>
+                </footer>
+            </section>
+        </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
