@@ -1,4 +1,4 @@
-# ☀️ WeatherWise
+# ☀️ WeatherAPI
 
 A modern weather dashboard that shows current weather and a 5-day forecast for any city, with theme and pagination features.
 
@@ -61,3 +61,4 @@ Created by Ralph Royet, December 2025.
 
 **Authentication:**
 - Free API key required (register at OpenWeatherMap)
+
